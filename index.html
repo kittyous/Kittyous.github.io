@@ -163,7 +163,10 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     elements = document.getElementsByClassName("text");
 	for(var i=0; i < elements.length; i++) 
 	{
+		if(localStorage.getItem(elements[i].name) != elements[i].value){
+		Now(i);
 		localStorage.setItem(elements[i].name,elements[i].value);
+		}
 		if(elements[i].value =="") empty++;
 	}
 	dateElements = document.getElementsByClassName("date");
