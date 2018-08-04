@@ -8,20 +8,20 @@
 <div class="header">
   <h1>
   <img class="a" src="https://2.bp.blogspot.com/-nGWU-D-EVR8/Vt3whJUV7MI/AAAAAAAABLY/EIhmoj8hWyk/s1600/5676e498b319b14f6740e6bb5232cb9b91132fce_hq.gif" alt="OwO"width="120">
-  &nbsp;&nbsp;HW Visualizer!!!&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;HW Visualizer!!!&nbsp;&nbsp;&nbsp;&nbsp;
   <img class="a" src="https://2.bp.blogspot.com/-nGWU-D-EVR8/Vt3whJUV7MI/AAAAAAAABLY/EIhmoj8hWyk/s1600/5676e498b319b14f6740e6bb5232cb9b91132fce_hq.gif" alt="OwO"width="120">
   </h1>
 </div>
 <div class="params">
-Current session: &nbsp;&nbsp;<input id = 'timerButton' type='button' onclick='ToggleSession();' value='Start' />&nbsp;<i id='sessionTimer'>0:0:0</i><br>
-  Textbook:      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current&nbsp;<input class="text" type="text" name="tfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="tlast">&nbsp;<input type='button' onclick='Now(0);' value='Now' /><i class = "date" id='td'></i></input><br>
-  Study Guide:   &nbsp;&nbsp;Current&nbsp;<input class="text" type="text" name="sfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="slast">&nbsp;<input type='button' onclick='Now(1);' value='Now' /><i class = "date" id = 'sd'></i></input><br>
-  Reading Guide: Current&nbsp;<input class="text" type="text" name="rfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="rlast">&nbsp;<input type='button' onclick='Now(2);' value='Now' /><i class = "date" id = "rd"></i></input><br>				   
-  Activities:    &nbsp;&nbsp;&nbsp;Current&nbsp;<input class="text" type="text" name="afirst">&nbsp;Final&nbsp;<input class="text" type="text" name="alast">&nbsp;<input type='button' onclick='Now(3);' value='Now' /><i class = "date" id = 'ad' ></i></input><br>
-  Music Theory:    &nbsp;Current&nbsp;<input class="text" type="text" name="mfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="mlast">&nbsp;<input type='button' onclick='Now(4);' value='Now' /><i class = "date" id = 'md'></i></input><br>
+Current session: &nbsp;&nbsp;<input id = 'timerButton' class = "button"type='button' onclick='ToggleSession();' value='Start' />&nbsp;<i id='sessionTimer'>0:0:0</i><br>
+  Textbook:      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current&nbsp;<input class="text" type="text" name="tfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="tlast">&nbsp;<input class = "button"type='button' onclick='Now(0);' value='Now' />&nbsp;<i class = "date" id='td'></i></input><br>
+  Study Guide:   &nbsp;&nbsp;Current&nbsp;<input class="text" type="text" name="sfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="slast">&nbsp;<input class = "button"type='button' onclick='Now(1);' value='Now' />&nbsp;<i class = "date" id = 'sd'></i></input><br>
+  Reading Guide: Current&nbsp;<input class="text" type="text" name="rfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="rlast">&nbsp;<input class = "button"type='button' onclick='Now(2);' value='Now' />&nbsp;<i class = "date" id = "rd"></i></input><br>				   
+  Activities:    &nbsp;&nbsp;&nbsp;Current&nbsp;<input class="text" type="text" name="afirst">&nbsp;Final&nbsp;<input class="text" type="text" name="alast">&nbsp;<input class = "button"type='button' onclick='Now(3);' value='Now' />&nbsp;<i class = "date" id = 'ad' ></i></input><br>
+  Music Theory:    &nbsp;Current&nbsp;<input class="text" type="text" name="mfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="mlast">&nbsp;<input class = "button"type='button' onclick='Now(4);' value='Now' />&nbsp;<i class = "date" id = 'md'></i></input><br>
   <br>
-  <input type='button' onclick='Clear();' value='Clear' />
-  <input type='button' onclick='Apply();' value='Apply' />
+  <input class='button'type='button' onclick='Clear();' value='Clear' />
+  <input class='button'type='button' onclick='Apply();' value='Apply' />
   <br>
 </div>
 <div class="bars">
@@ -39,6 +39,25 @@ Current session: &nbsp;&nbsp;<input id = 'timerButton' type='button' onclick='To
 <style>
 * {
     box-sizing: border-box;
+}
+.button {
+font-family: Monospace;
+	border-radius: 5px;
+    background-color: #f1f1f1; 
+    color: gray; 
+    border: 2px solid #abd69f;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 1px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: #abd69f;
+    color: white;
 }
 img.a {
     vertical-align: -100%;
@@ -74,7 +93,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	font-size: 12pt;
     background-color: white;
     margin-top: 20px;
-	padding: 20px 20px 20px 40px;
+	padding: 20px 20px 25px 40px;
 }
 .bars {
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -285,7 +304,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	s_h = Math.floor(dif / hours);
 	s_m = Math.floor((dif-(hours * Math.floor(dif / hours)))  / minutes);
 	s_s = Math.floor((dif-(minutes * Math.floor(dif / minutes)))  / 1000);
-	timer.textContent = s_s+":"+s_m+":"+s_h;
+	timer.textContent = s_h+":"+s_m+":"+s_s;
 	setTimeout('UpdateSessionTimer()',1000);
   }
   }
