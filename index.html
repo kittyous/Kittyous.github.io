@@ -144,7 +144,8 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   {
    SaveToCache();
   }
-  
+  var InProgress;
+  var startTime ;
   function Load(){
 	LoadFromCache();
 	Apply();
@@ -180,6 +181,13 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   
     elements = document.getElementsByClassName("text");
 	if(localStorage.length > 0){
+		var sbool = localStorage.getItem("InProgress");
+		if(sbool === "true"){InProgress = true;}
+		else{InProgress = false;}
+		startTime = localStorage.getItem("startTime");
+		ResumeSession();
+		
+		
 		for(var i=0; i < elements.length; i++) 
 		{
 			elements[i].value = localStorage.getItem(elements[i].name);
@@ -235,15 +243,28 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   var s_s = 0;
   var s_m = 0;
   var s_h = 0;
-  var InProgress = false;
+  
   var timer;
-  var startTime = 0;
-  function ToggleSession(){
-	InProgress = !InProgress;
-	console.log(InProgress);
+  var bool = true;
+  function ResumeSession(){
+   
+  if(InProgress === true){
+  console.log(InProgress +" after");
 	var button = document.getElementById("timerButton");
 	timer = document.getElementById("sessionTimer");
-	if(InProgress == true){ 
+	button.value = "Stop"
+	UpdateSessionTimer();
+	}
+	
+  }
+  function ToggleSession(){
+  
+	if(InProgress === true) {InProgress = false;}else{InProgress = true;}
+	localStorage.setItem("InProgress",InProgress === true);
+	
+	var button = document.getElementById("timerButton");
+	timer = document.getElementById("sessionTimer");
+	if(InProgress === true){ 
 		s_s = 0;
 		s_m = 0;
 		s_h = 0;
@@ -254,10 +275,11 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	else{ 
 		button.value = "Start"
 	}
+	localStorage.setItem("startTime",startTime);
   }
  
   function UpdateSessionTimer(){
-  if(InProgress == true){
+  if(InProgress === true){
 	var now = Date.now();
 	var dif  = now - startTime;
 	s_h = Math.floor(dif / hours);
