@@ -145,11 +145,18 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
   
   function Load(){
-	LoadFromCache()
+	LoadFromCache();
 	Apply();
+	UptateTimes()
   }
   var elements;
-  var dates;
+  var dateElements;
+  var dateTimes = [];
+  
+  var minutes = 60000;
+  var hours = minutes * 60;
+  var days = hours * 24;
+  var weeks = days * 7;
   //Cache Functions
   function SaveToCache(){
   var empty = 0;
@@ -159,28 +166,25 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		localStorage.setItem(elements[i].name,elements[i].value);
 		if(elements[i].value =="") empty++;
 	}
-	dates = document.getElementsByClassName("date");
+	dateElements = document.getElementsByClassName("date");
 	
-	for(var i=0; i < dates.length; i++) 
-	{
-		localStorage.setItem(dates[i].id,dates[i].textContent);
-	}
+	
 	if(empty == elements.length) localStorage.clear();
   }
   var defaultValues = [50,118,13,34,10,23,17,38,15,61]
   function LoadFromCache(){
+  
     elements = document.getElementsByClassName("text");
 	if(localStorage.length > 0){
 		for(var i=0; i < elements.length; i++) 
 		{
 			elements[i].value = localStorage.getItem(elements[i].name);
 		}
-		dates = document.getElementsByClassName("date");
-		for(var i=0; i < dates.length; i++) 
+		dateElements = document.getElementsByClassName("date");
+		for(var i=0; i < dateElements.length; i++) 
 		{
-			dates[i].textContent = localStorage.getItem(dates[i].id);
+			dateTimes[i] = localStorage.getItem(i+"d");	
 		}
-		localStorage.clear();
 		}
 		else{
 		for(var i=0; i < elements.length; i++) 
@@ -205,13 +209,13 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
   
   function Now(a){
-	var d = new Date();
-	dates = document.getElementsByClassName("date");
-	dates[a].textContent = d.getHours()+":"+d.getMinutes() +" "+d.getDate() +"/"+ (d.getMonth()+1);
+	dateElements = document.getElementsByClassName("date");
+	dateTimes[a] = Date.now();
+	localStorage.setItem(a+"d",dateTimes[a]);
+	UptateTimes();
   }
   function Refresh()
   {
-	Clear();
 	location.reload();
   }
   
@@ -224,6 +228,24 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		elements[i].value = "";
 	}
   }
+  function UptateTimes(){
+	var now = Date.now();
+	var dif  = 0;
+	var m = 0;
+	var h = 0;
+	var d =0;
+	var w =0;
+	for(var i=0; i<dateTimes.length; i++) 
+	{
+		dif = now - dateTimes[i];
+		w = Math.floor(dif / weeks);
+		d = Math.floor((dif - (weeks * w)) / days);
+		h = Math.floor((dif - (days * Math.floor(dif / days))) / hours);
+		m = Math.floor((dif-(hours * Math.floor(dif / hours)))  / minutes);
+		dateElements[i].textContent = m+"/"+ h+"/"+ d+ "/"+ w; 
+	}
+	setTimeout('UptateTimes()',60000);
+  }
   
   //Animation Functions
   var pos = 10;
@@ -232,6 +254,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   var difmult = 0;
   var velocity = 0;
   var str ="";
+  
   window.onfocus = function() {
     MoveBackground();
   };
