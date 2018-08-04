@@ -13,15 +13,38 @@
   </h1>
 </div>
 <div class="params">
+<div id="session">
 Current session: &nbsp;&nbsp;<input id = 'timerButton' class = "button"type='button' onclick='ToggleSession();' value='Start' />&nbsp;<i id='sessionTimer'>0:0:0</i><br>
-  Textbook:      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current&nbsp;<input class="text" type="text" name="tfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="tlast">&nbsp;<input class = "button"type='button' onclick='Now(0);' value='Now' />&nbsp;<i class = "date" id='td'></i></input><br>
-  Study Guide:   &nbsp;&nbsp;Current&nbsp;<input class="text" type="text" name="sfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="slast">&nbsp;<input class = "button"type='button' onclick='Now(1);' value='Now' />&nbsp;<i class = "date" id = 'sd'></i></input><br>
-  Reading Guide: Current&nbsp;<input class="text" type="text" name="rfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="rlast">&nbsp;<input class = "button"type='button' onclick='Now(2);' value='Now' />&nbsp;<i class = "date" id = "rd"></i></input><br>				   
-  Activities:    &nbsp;&nbsp;&nbsp;Current&nbsp;<input class="text" type="text" name="afirst">&nbsp;Final&nbsp;<input class="text" type="text" name="alast">&nbsp;<input class = "button"type='button' onclick='Now(3);' value='Now' />&nbsp;<i class = "date" id = 'ad' ></i></input><br>
-  Music Theory:    &nbsp;Current&nbsp;<input class="text" type="text" name="mfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="mlast">&nbsp;<input class = "button"type='button' onclick='Now(4);' value='Now' />&nbsp;<i class = "date" id = 'md'></i></input><br>
-  <br>
-  <input class='button'type='button' onclick='Clear();' value='Clear' />
+</div>
+<div id="titles">
+
+Textbook: <br>
+Study Guide: <br>
+Reading Guide: <br>
+Activities: <br>
+Music Theory: <br>
+
+</div>
+<div id="input">
+Current&nbsp;<input class="text" type="text" name="tfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="tlast"><br>
+Current&nbsp;<input class="text" type="text" name="sfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="slast"><br>
+Current&nbsp;<input class="text" type="text" name="rfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="rlast"><br>		   
+Current&nbsp;<input class="text" type="text" name="afirst">&nbsp;Final&nbsp;<input class="text" type="text" name="alast"><br>
+Current&nbsp;<input class="text" type="text" name="mfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="mlast"><br>
+</div>
+<div id="time">
+<input type='button' onclick='Now(0);' value='Now' />&nbsp;<i class = "date" id='td'></i></input><br>
+<input type='button' onclick='Now(1);' value='Now' />&nbsp;<i class = "date" id = 'sd'></i></input><br>
+<input type='button' onclick='Now(2);' value='Now' />&nbsp;<i class = "date" id = "rd"></i></input><br>	
+<input type='button' onclick='Now(3);' value='Now' />&nbsp;<i class = "date" id = 'ad' ></i></input><br>
+<input type='button' onclick='Now(4);' value='Now' />&nbsp;<i class = "date" id = 'md'></i></input><br>
+</div>
+<div id="buttons">
+<input class='button'type='button' onclick='Clear();' value='Clear' />
   <input class='button'type='button' onclick='Apply();' value='Apply' />
+</div>
+
+
   <br>
 </div>
 <div class="bars">
@@ -40,8 +63,55 @@ Current session: &nbsp;&nbsp;<input id = 'timerButton' class = "button"type='but
 * {
     box-sizing: border-box;
 }
-.button {
-font-family: Monospace;
+#session{
+	margin:1vw;
+}
+#buttons{
+clear:both;
+	margin:1vw;
+}
+#titles{
+
+width: 15vw;
+	line-height: 6.3vw;
+	float: left;
+	margin:1vw;
+}
+#time{
+width: 18vw;
+line-height: 6.3vw;
+	float: left;
+	margin:1vw;
+}
+#input{
+line-height: 6.3vw;
+width: 45vw;
+	float: left;
+	margin:1vw;
+}
+input[type=text] {
+    width: 12vw;
+
+	font-size: 1.8vw;
+    padding: 4px 10px;
+    margin: 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=button] {
+    width: 7vw;
+    padding: 5px 4px;
+    margin: 9px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    box-sizing: border-box;
+	font-size: 1.8vw;
+}{
+	font-family: Monospace;
 	border-radius: 5px;
     background-color: #f1f1f1; 
     color: gray; 
@@ -55,7 +125,7 @@ font-family: Monospace;
     transition-duration: 0.4s;
     cursor: pointer;
 }
-.button:hover {
+input[type=button]:hover {
     background-color: #abd69f;
     color: white;
 }
@@ -67,6 +137,7 @@ img.a {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 body {
+display: grid;
     font-family: Arial;
     padding: 10px;
     
@@ -77,9 +148,9 @@ body {
 }
 
 .header {
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-margin-left: 2vw;
-font-size: 1.8vw;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	margin-left: 2vw;
+	font-size: 1.8vw;
 	margin-right: 2vw;
 	margin-bottom: 40px;
     background-color: white;
@@ -89,71 +160,68 @@ font-size: 1.8vw;
 
 }
 .params {
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	//text-align: center;
-	font-family: Monospace;
-	font-size: 12pt;
+	font-family: Arial;
+	font-size: 2vw;
     background-color: white;
     margin-top: 20px;
 	margin-left 8px;
 	margin-right 8px;
-	padding: 20px 20px 25px 40px;
+	padding: 20px;
 }
 .bars {
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	margin-left: 20px;
 	margin-right: 20px;
-
-	height: 240px;
     background-color: white;
     padding: 30px;
     margin-top: 50px;
-
+font-size: 2.5vw;
 	text-align: center;
 }
 
 .barBack {
 	
     width: 100%;
-	height: 23px;
+	height: 3vw;
     background-color: #f1f1f1;
 }
 .barMid {
 	
     width: 50%;
-	height: 23px;
+	height: 3vw;
     background-color: gray;
 }
 #tBar {
-	font-size: 14pt;
+
     width: 100%;
-    height: 23px;
+    height: 3vw;
     background-color: #abd69f;
 }
 #sBar {
-	font-size: 14pt;
+
     width: 100%;
-    height: 23px;
+    height: 3vw;
     background-color: #abd69f;
 }
 #rBar {
 
-    font-size: 14pt;
     width: 100%;
-    height: 23px;
+    height: 3vw;
     background-color: #abd69f;
 }
 #aBar {
-	font-size: 14pt;
+
     width: 100%;
-    height: 23px;
+    height: 3vw;
     background-color: #abd69f;
 }
 #mBar {
 
-    font-size: 14pt;
+
     width: 100%;
-    height: 23px;
+    height: 3vw;
     background-color: #abd69f;
 }
 }
@@ -194,9 +262,6 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		}
 		if(elements[i].value =="") empty++;
 	}
-	dateElements = document.getElementsByClassName("date");
-	
-	
 	if(empty == elements.length) localStorage.clear();
   }
   var defaultValues = [50,118,13,34,10,23,17,38,15,61]
