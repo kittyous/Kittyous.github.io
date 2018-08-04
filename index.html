@@ -13,6 +13,7 @@
   </h1>
 </div>
 <div class="params">
+Current session: &nbsp;&nbsp;<input id = 'timerButton' type='button' onclick='ToggleSession();' value='Start' />&nbsp;<i id='sessionTimer'>0:0:0</i><br>
   Textbook:      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current&nbsp;<input class="text" type="text" name="tfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="tlast">&nbsp;<input type='button' onclick='Now(0);' value='Now' /><i class = "date" id='td'></i></input><br>
   Study Guide:   &nbsp;&nbsp;Current&nbsp;<input class="text" type="text" name="sfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="slast">&nbsp;<input type='button' onclick='Now(1);' value='Now' /><i class = "date" id = 'sd'></i></input><br>
   Reading Guide: Current&nbsp;<input class="text" type="text" name="rfirst">&nbsp;Final&nbsp;<input class="text" type="text" name="rlast">&nbsp;<input type='button' onclick='Now(2);' value='Now' /><i class = "date" id = "rd"></i></input><br>				   
@@ -230,6 +231,41 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	{
 		elements[i].value = "";
 	}
+  }
+  var s_s = 0;
+  var s_m = 0;
+  var s_h = 0;
+  var InProgress = false;
+  var timer;
+  var startTime = 0;
+  function ToggleSession(){
+	InProgress = !InProgress;
+	console.log(InProgress);
+	var button = document.getElementById("timerButton");
+	timer = document.getElementById("sessionTimer");
+	if(InProgress == true){ 
+		s_s = 0;
+		s_m = 0;
+		s_h = 0;
+		startTime = Date.now();
+		button.value = "Stop"
+		UpdateSessionTimer();
+	}
+	else{ 
+		button.value = "Start"
+	}
+  }
+ 
+  function UpdateSessionTimer(){
+  if(InProgress == true){
+	var now = Date.now();
+	var dif  = now - startTime;
+	s_h = Math.floor(dif / hours);
+	s_m = Math.floor((dif-(hours * Math.floor(dif / hours)))  / minutes);
+	s_s = Math.floor((dif-(minutes * Math.floor(dif / minutes)))  / 1000);
+	timer.textContent = s_s+":"+s_m+":"+s_h;
+	setTimeout('UpdateSessionTimer()',1000);
+  }
   }
   function UptateTimes(){
 	var now = Date.now();
