@@ -26,7 +26,6 @@
 	for(var i=0; i < elements.length; i++) 
 	{
 		if(localStorage.getItem(elements[i].name) != elements[i].value){
-		Now(i);
 		localStorage.setItem(elements[i].name,elements[i].value);
 		}
 		if(elements[i].value =="") empty++;
@@ -134,7 +133,6 @@
 	}
 	localStorage.setItem("startTime",startTime);
   }
- 
   function UpdateSessionTimer(){
   if(InProgress === true){
 	var now = Date.now();
