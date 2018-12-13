@@ -7,12 +7,18 @@
   var InProgress;
   var startTime ;
   function Load(){
+	  countdownElements = document.getElementsByClassName("countdown");
+	  coutdownTimes[0] = new Date('December 21, 2018 11:59:00');
+	  coutdownTimes[1] = new Date('December 30, 2018 11:59:00');
 	LoadFromCache();
 	Apply();
-	UptateTimes()
+	
+	UptateTimes();
   }
   var elements;
   var dateElements;
+  var countdownElements;
+  var coutdownTimes = [];
   var dateTimes = [];
   
   var minutes = 60000;
@@ -63,7 +69,7 @@
   }
   
   //Functional Functions
-  var names  = ["tBar","sBar","rBar","aBar","mBar"]
+  var names  = ["wBar","sBar"]
   function Apply(){
 	elements = document.querySelectorAll('input[type=text]');
 	
@@ -160,9 +166,16 @@
 		m = Math.floor((dif-(hours * Math.floor(dif / hours)))  / minutes);
 		dateElements[i].textContent = m+"/"+ h+"/"+ d+ "/"+ w; 
 	}
+	for(var i=0; i<coutdownTimes.length; i++) 
+	{
+		dif = coutdownTimes[i] - now;
+		d = Math.floor(dif  / days);
+		h = Math.floor((dif - (days * Math.floor(dif / days))) / hours);
+		m = Math.floor((dif-(hours * Math.floor(dif / hours)))  / minutes);
+		countdownElements[i].textContent = m+"/"+ h+"/"+ d; 
+	}
 	setTimeout('UptateTimes()',60000);
   }
-  
   //Animation Functions
   var pos = 10;
   var size =10;
